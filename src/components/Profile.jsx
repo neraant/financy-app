@@ -1,5 +1,5 @@
 import Header from './Header'
-import UserBalanceInfo from './userBalanceInfo'
+import UserBalanceInfo from './UserBalanceInfo'
 import UserProfileDetails from './UserProfileDetails'
 
 const Profile = () => {
