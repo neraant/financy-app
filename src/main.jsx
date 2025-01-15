@@ -24,11 +24,11 @@ const router = createBrowserRouter([
     element: <Payments />,
     errorElement: <NotFoundPage />,
   },
-  {
-    path: '/notification',
-    // element: <Notification />,
-    errorElement: <NotFoundPage />,
-  },
+  // {
+  //   path: '/notification',
+  //   element: <Notification />,
+  //   errorElement: <NotFoundPage />,
+  // },
 ])
 
 createRoot(document.getElementById('root')).render(
