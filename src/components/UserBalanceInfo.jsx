@@ -6,12 +6,12 @@ const UserBalanceInfo = () => {
 		{
 			icon: cashIcon,
 			title: "Баланс:",
-			value: "1 250 000 руб.",
+			value: "0 руб.",
 		},
 		{
 			icon: purseIcon,
 			title: "Выручка:",
-			value: "86 316 руб.",
+			value: "0 руб.",
 		},
 	]
 	

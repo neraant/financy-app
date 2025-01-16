@@ -4,6 +4,7 @@ import App from './App'
 import './index.css'
 
 import { createBrowserRouter, RouterProvider } from 'react-router-dom'
+import AddSpent from './components/AddSpent'
 import NotFoundPage from './components/NotFoundPage'
 import Payments from './components/Payments'
 import Profile from './components/Profile'
@@ -22,6 +23,11 @@ const router = createBrowserRouter([
   {
     path: '/payments',
     element: <Payments />,
+    errorElement: <NotFoundPage />,
+  },
+  {
+    path: "/addSpent",
+    element: <AddSpent />,
     errorElement: <NotFoundPage />,
   },
   // {

@@ -14,12 +14,18 @@ const headerContent = {
     alt: "back",
     title: "Платежи"
   },
+  addSpent: {
+    link: "/",
+    icon: backIcon,
+    alt: "back",
+    title: "Добавить"
+  },
   home: {
     link: "/notifications",
     icon: notificationIcon,
     alt: "notifications",
     title: "Личный кабинет"
-  }
+  },
 };
 
 const Header = ({ page = "home" }) => {

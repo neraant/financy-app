@@ -1,113 +1,27 @@
-import React, { useState } from 'react';
-import { v4 as uuidv4 } from 'uuid';
-import { months } from '../utils';
+import React, { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
+import { loadFromLocalStorage, saveToLocalStorage } from '../utils';
 import PaymentsItem from './PaymentsItem';
 
-const paymentsList = [
-	{
-		id: uuidv4(),
-		total: 100,
-		category: "Еда",
-		date: processDate(new Date()),
-	},
-	{
-		id: uuidv4(),
-		total: 200,
-		category: "Работа",
-		date: processDate(new Date()),
-	},
-	{
-		id: uuidv4(),
-		total: 300,
-		category: "Учёба",
-		date: processDate(new Date()),
-	},
-	{
-		id: uuidv4(),
-		total: 400,
-		category: "Еда",
-		date: processDate(new Date()),
-	},
-	{
-		id: uuidv4(),
-		total: 50000000000000000,
-		category: "Отсальное",
-		date: processDate(new Date()),
-	},
-	{
-		id: uuidv4(),
-		total: 100,
-		category: "Еда",
-		date: processDate(new Date()),
-	},
-	{
-		id: uuidv4(),
-		total: 200,
-		category: "Работа",
-		date: processDate(new Date()),
-	},
-	{
-		id: uuidv4(),
-		total: 300,
-		category: "Учёба",
-		date: processDate(new Date()),
-	},
-	{
-		id: uuidv4(),
-		total: 400,
-		category: "Еда",
-		date: processDate(new Date()),
-	},
-	{
-		id: uuidv4(),
-		total: 50000000000000000,
-		category: "Отсальное",
-		date: processDate(new Date()),
-	},
-	{
-		id: uuidv4(),
-		total: 100,
-		category: "Еда",
-		date: processDate(new Date()),
-	},
-	{
-		id: uuidv4(),
-		total: 200,
-		category: "Работа",
-		date: processDate(new Date()),
-	},
-	{
-		id: uuidv4(),
-		total: 300,
-		category: "Учёба",
-		date: processDate(new Date()),
-	},
-	{
-		id: uuidv4(),
-		total: 400,
-		category: "Еда",
-		date: processDate(new Date()),
-	},
-	{
-		id: uuidv4(),
-		total: 50000000000000000,
-		category: "Отсальное",
-		date: processDate(new Date()),
-	},
-]
-
-function processDate(date) {
-	const day = date.getDate()
-	const month = months[date.getMonth()]
-	const hours = date.getHours()
-	const minutes = date.getMinutes()
-	const seconds = date.getSeconds()
-
-	return `${day} ${month} в ${hours}:${minutes}:${seconds}`
-}
-
 const PaymentsList = () => {
+	const [paymentsList, setPaymentsList] = useState([])
 	const [visibleCount, setVisibleCount] = useState(8)
+	const [total, setTotal] = useState(0)
+
+	useEffect(() => {
+		setPaymentsList(loadFromLocalStorage('paymentsList'))
+	}, [])
+
+	useEffect(() => {
+    const totalAmount = paymentsList.reduce((acc, cur) => acc + parseFloat(cur.total), 0);
+    setTotal(totalAmount);
+	}, [paymentsList]);
+
+	const deleteSpent = (spentId) => {
+		const filteredPaymentsList = paymentsList.filter(payment => payment.id != spentId)
+		setPaymentsList(filteredPaymentsList) 
+		saveToLocalStorage("paymentsList", filteredPaymentsList)
+	}
 
 	const loadMore = () => {
 		setVisibleCount(pre => pre + 4)
@@ -115,25 +29,34 @@ const PaymentsList = () => {
 
 	return (
 		<section className='px-6 pb-6 mt-8 flex flex-col items-center'>
-			<div className="screen-max-width w-full mb-4">
-				<button className='font-sans text-sm bg-white py-2 w-full shadow-sm rounded-md'>
-					Добавить 
-				</button>
+			<div className="flex screen-max-width w-full mb-4">
+					<Link to="/addSpent" className='font-sans text-sm bg-[#D4FFEA] py-2 w-full shadow-md rounded-md text-center'>
+						Добавить 
+					</Link>
 			</div>
 
 			<div className="screen-max-width rounded-2xl shadow-md bg-white w-full">
 				<div className="flex items-center justify-between px-6 py-6 relative ">
-					<h4 className='font-normal font-sans text-md flex items-center gap-4'>
-						Всего выплат:
-						<span className='font-sans text-gray'>{paymentsList.length}</span>
-					</h4>
+					<div className="flex items-center justify-between w-full">
+						<h4 className='font-normal font-sans text-md flex items-center gap-4'>
+							Всего выплат:
+							<span className='font-sans text-gray'>{paymentsList.length}</span>
+						</h4>
+
+						<h4 className='font-normal font-sans text-md flex items-center gap-4 overflow-hidden text-ellipsis'>
+							Всего потрачено:
+							<span className='font-sans text-gray'>
+    						{total} руб.
+							</span>
+						</h4>
+					</div>
 
 					<span className='block w-full h-[1px] bg-gray absolute bottom-0 left-0 opacity-20' />
 				</div>
 
 				<div className="flex flex-col px-6">
 					{paymentsList.slice(0, visibleCount).map((item, index) => (
-						<PaymentsItem key={item.id} payment={item} paymentsList={paymentsList} index={index} />
+						<PaymentsItem key={item.id} payment={item} paymentsList={paymentsList} deleteSpent={deleteSpent} index={index} />
 					))}
 				</div>
 			</div>
