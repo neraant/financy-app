@@ -8,9 +8,9 @@ import {
   Title,
   Tooltip,
 } from 'chart.js';
-import { useEffect, useState } from 'react';
 import { Line } from 'react-chartjs-2';
-import { isInLast6Months, isSameDay, isSameMonth, isSameWeek, isSameYear, loadFromLocalStorage } from '../utils';
+import { isInLast6Months, isSameDay, isSameMonth, isSameWeek, isSameYear } from '../utils/helpers';
+import { loadFromLocalStorage } from '../utils/storage';
 
 ChartJS.register(
   CategoryScale,
@@ -153,7 +153,7 @@ const datasets = {
 };
 
 const ChartView = ({ pickedDate }) => {
-  const [chartData, setChartData] = useState({
+  const data = {
     labels: datasets[pickedDate.def].labels,
     datasets: [
       {
@@ -164,29 +164,13 @@ const ChartView = ({ pickedDate }) => {
         tension: 0.4,
       },
     ],
-  })
-
-  useEffect(() => {
-    const newData = {
-      labels: datasets[pickedDate.def].labels,
-      datasets: [
-        {
-          label: `Spent`,
-          data: datasets[pickedDate.def].data,
-          borderColor: '#2992F0',
-          backgroundColor: 'rgba(75, 192, 192, 0.2)',
-          tension: 0.4,
-        },
-      ],
-    }
-    setChartData(newData)
-  }, [])
+  }
 
 	return (
 		<Line 
 			className='px-4 pt-1 pb-3'
 			options={options} 
-			data={chartData} 
+			data={data} 
 		/>		
 	)
 }

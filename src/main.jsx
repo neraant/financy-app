@@ -4,10 +4,10 @@ import App from './App'
 import './index.css'
 
 import { createBrowserRouter, RouterProvider } from 'react-router-dom'
-import AddSpent from './components/AddSpent'
-import NotFoundPage from './components/NotFoundPage'
-import Payments from './components/Payments'
-import Profile from './components/Profile'
+import NotFoundPage from './components/common/NotFoundPage'
+import AddSpent from './components/payment/AddSpent'
+import Payments from './components/payment/Payments'
+import Profile from './components/profile/Profile'
 
 const router = createBrowserRouter([
   {

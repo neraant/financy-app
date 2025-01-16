@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import { backIcon, notificationIcon, userIcon } from '../utils';
+import { backIcon, notificationIcon, userIcon } from '../../utils';
 
 const headerContent = {
   profile: {

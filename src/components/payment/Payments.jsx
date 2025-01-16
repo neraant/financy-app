@@ -1,4 +1,4 @@
-import Header from './Header'
+import Header from '../common/Header'
 import PaymentsList from './PaymentsList'
 
 const Payments = () => {

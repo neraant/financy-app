@@ -1,8 +1,9 @@
 import { isNumber } from 'chart.js/helpers';
 import { useEffect, useState } from 'react';
 import { v4 as uuidv4 } from 'uuid';
-import { loadFromLocalStorage, months, saveToLocalStorage } from '../utils';
-import Header from './Header';
+import { months } from '../../utils/helpers';
+import { loadFromLocalStorage, saveToLocalStorage } from '../../utils/storage';
+import Header from '../common/Header';
 
 const categories = [
 	"Продукты питания",
@@ -57,7 +58,7 @@ const AddSpent = () => {
 
 		const newPayment = {
 			id: uuidv4(),
-			total: spentTotal,
+			total: Number(spentTotal).toFixed(2),
 			category: category,
 			name: spentName,
 			date: processDate(new Date()),

@@ -1,4 +1,4 @@
-import { deleteIcon } from '../utils'
+import { deleteIcon } from '../../utils'
 
 const PaymentsItem = ({ payment, paymentsList, deleteSpent, index }) => {
 	return (

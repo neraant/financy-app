@@ -1,7 +1,7 @@
-import Header from './components/Header'
+import Header from './components/common/Header'
+import UserBalanceInfo from './components/profile/UserBalanceInfo'
 import Statistic from './components/Statistic'
 import UserActivesList from './components/UserActivesList'
-import UserBalanceInfo from './components/UserBalanceInfo'
 
 const App = () => {
   return (

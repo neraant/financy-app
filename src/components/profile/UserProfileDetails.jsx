@@ -1,4 +1,4 @@
-import { googleIcon, tgIcon, userIcon, vkIcon } from '../utils'
+import { googleIcon, tgIcon, userIcon, vkIcon } from '../../utils'
 
 const UserProfileDetails = () => {
 	return (

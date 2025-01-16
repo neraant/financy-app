@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import { loadFromLocalStorage, saveToLocalStorage } from '../utils';
+import { loadFromLocalStorage, saveToLocalStorage } from '../../utils/storage';
 import PaymentsItem from './PaymentsItem';
 
 const PaymentsList = () => {
@@ -36,8 +36,8 @@ const PaymentsList = () => {
 			</div>
 
 			<div className="screen-max-width rounded-2xl shadow-md bg-white w-full">
-				<div className="flex items-center justify-between px-6 py-6 relative ">
-					<div className="flex items-center justify-between w-full">
+				<div className="flex items-center justify-between px-3 sm:px-6 py-6 relative ">
+					<div className="flex sm:items-center flex-col sm:flex-row justify-between w-full">
 						<h4 className='font-normal font-sans text-md flex items-center gap-4'>
 							Всего выплат:
 							<span className='font-sans text-gray'>{paymentsList.length}</span>
@@ -54,7 +54,7 @@ const PaymentsList = () => {
 					<span className='block w-full h-[1px] bg-gray absolute bottom-0 left-0 opacity-20' />
 				</div>
 
-				<div className="flex flex-col px-6">
+				<div className="flex flex-col px-3 sm:px-6">
 					{paymentsList.slice(0, visibleCount).map((item, index) => (
 						<PaymentsItem key={item.id} payment={item} paymentsList={paymentsList} deleteSpent={deleteSpent} index={index} />
 					))}
