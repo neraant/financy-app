@@ -16,8 +16,6 @@ const Profile = () => {
 		let oldBalance = loadFromLocalStorage('balance')
 		let accBalance = (Number(newBalance) + Number(oldBalance)).toFixed(2)
 
-		// let monthlySpentBalance = calculateMonthlySpent()
-
 		saveToLocalStorage('balance', accBalance)
 
 		setShowAddBalance(false)

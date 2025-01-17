@@ -25,9 +25,15 @@ const UserProfileDetails = () => {
 						</span>
 
 						<div className="flex items-center bg-white gap-6 py-2 px-4 rounded-lg absolute left-[50%] bottom-[-66px] translate-x-[-50%] shadow-sm">
-							<img src={googleIcon} alt="google" width={24} height={24} />
-							<img src={vkIcon} alt="vk" width={24} height={24} />
-							<img src={tgIcon} alt="telegram" width={24} height={24} />
+							<button>
+								<img src={googleIcon} alt="google" width={24} height={24} />
+							</button>
+							<button>
+								<img src={vkIcon} alt="vk" width={24} height={24} />
+							</button>
+							<button>
+								<img src={tgIcon} alt="telegram" width={24} height={24} />
+							</button>
 						</div>
 					</div>
 				</div>

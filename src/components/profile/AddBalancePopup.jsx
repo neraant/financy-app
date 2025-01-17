@@ -1,7 +1,7 @@
 const AddBalancePopup = ({ showAddBalance, balanceInput, setBalanceInput, addBalance }) => {
 	return (
 		<form 
-			className={`absolute z-20 top-[50%] left-[50%] translate-x-[-50%] transition-all duration-300 bg-white p-6 rounded-md flex flex-col w-full max-w-80 ${!showAddBalance ? 'translate-y-[-50%] opacity-1 visible' : 'translate-y-[-10%] opacity-0 hidden'}`}
+			className={`absolute z-20 top-[50%] left-[50%] translate-y-[-50%] translate-x-[-50%]  bg-white p-6 rounded-md flex flex-col w-full max-w-80`}
 		>
 			<h4 className='font-bold font-sans text-lg mb-2'>
 				Введите сумму

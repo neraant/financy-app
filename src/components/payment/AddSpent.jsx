@@ -26,6 +26,20 @@ function processDate(date) {
 	return `${day} ${month} в ${hours}:${minutes}:${seconds}`
 }
 
+const calculateMonthlySpent = () => {
+  const allPayments = loadFromLocalStorage('paymentsList') || [];
+  
+  const currentMonth = new Date().getMonth();
+  const currentYear = new Date().getFullYear();
+
+  const monthlyPayments = allPayments.filter(({ nonFormatedDate: date }) => {
+    const paymentDate = new Date(date);
+    return paymentDate.getMonth() === currentMonth && paymentDate.getFullYear() === currentYear;
+  });
+
+  return (monthlyPayments.reduce((acc, { total }) => acc + Number(total), 0)).toFixed(2);
+};
+
 const AddSpent = () => {
 	const [spentName, setSpentName] = useState("")
 	const [spentTotal, setSpentTotal] = useState(0)
@@ -70,6 +84,13 @@ const AddSpent = () => {
       saveToLocalStorage('paymentsList', updatedList);
       return updatedList;
 		})
+
+		// calculationg balance 
+		let initialBalance = loadFromLocalStorage('balance') || (0).toFixed(2)
+		if(Array.isArray(initialBalance)) initialBalance = (0).toFixed(2)
+
+		let calcBalance = (Number(initialBalance) - Number(spentTotal)) .toFixed(2)
+		saveToLocalStorage('balance', calcBalance)
 
 		setSpentName("")
 		setSpentTotal(0)

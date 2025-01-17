@@ -34,9 +34,6 @@ const UserBalanceInfo = ({ showAddBalance, setShowAddBalance, balanceInput, setB
 		let initialBalance = loadFromLocalStorage('balance') || (0).toFixed(2)
 		if(Array.isArray(initialBalance)) initialBalance = (0).toFixed(2)
 		setBalance(initialBalance)
-
-		// calculating balance
-		let calculatedMonthlySpent = calculateMonthlySpent()
 	}, [balanceInput]);
 
 	const balances = [
@@ -71,20 +68,24 @@ const UserBalanceInfo = ({ showAddBalance, setShowAddBalance, balanceInput, setB
 				</div>
 			</section>
 
-			{showAddBalance && (
-				<>
-					<div 
-						className={`absolute w-full h-full bg-black top-0 left-0 z-10 ${showAddBalance ? 'opacity-40 visible' : ' opacity-0 hidden'}`} 
-						onClick={() => setShowAddBalance(false)}
-					/>
-					<AddBalancePopup 
-						showAddPopup={showAddBalance} 
-						balanceInput={balanceInput}
-						setBalanceInput={setBalanceInput}	
-						addBalance={addBalance}
-					/>
-				</>
-			)}
+			<div 
+				className='absolute w-full h-full top-0 left-0 transition-all duration-300'
+				style={{
+					opacity: !showAddBalance ? 0 : 1,
+					visibility: !showAddBalance ? 'hidden' : 'visible'
+				}}
+			>
+				<div 
+					className={`absolute w-full h-full bg-black top-0 left-0 z-10 opacity-40 `} 
+					onClick={() => setShowAddBalance(false)}
+				/>
+				<AddBalancePopup 
+					showAddPopup={showAddBalance} 
+					balanceInput={balanceInput}
+					setBalanceInput={setBalanceInput}	
+					addBalance={addBalance}
+				/>
+			</div>
 		</div>
 	)
 }
