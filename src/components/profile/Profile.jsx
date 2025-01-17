@@ -7,7 +7,8 @@ import UserProfileDetails from './UserProfileDetails'
 
 const Profile = () => {
 	const [showAddBalance, setShowAddBalance] = useState(false)
-	const [balanceInput, setBalanceInput] = useState(0)
+	const [isEditing, setIsEditing] = useState(false)
+	const [balanceInput, setBalanceInput] = useState("")
 
 	const addBalance = (e, newBalance) => {
 		e.preventDefault()
@@ -19,7 +20,8 @@ const Profile = () => {
 		saveToLocalStorage('balance', accBalance)
 
 		setShowAddBalance(false)
-		setBalanceInput(0)
+		setBalanceInput("")
+		setIsEditing(false)
 	}
 
 	return (
@@ -33,6 +35,8 @@ const Profile = () => {
 				setBalanceInput={setBalanceInput}
 				isHomepage={false}
 				addBalance={addBalance}
+				isEditing={isEditing}
+				setIsEditing={setIsEditing}
 			/>
 		</main>
 	)

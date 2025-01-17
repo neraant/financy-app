@@ -8,6 +8,7 @@ import {
   Title,
   Tooltip,
 } from 'chart.js';
+import { useEffect, useState } from 'react';
 import { Line } from 'react-chartjs-2';
 import { isInLast6Months, isSameDay, isSameMonth, isSameWeek, isSameYear } from '../utils/helpers';
 import { loadFromLocalStorage } from '../utils/storage';
@@ -152,25 +153,45 @@ const datasets = {
   },
 };
 
-const ChartView = ({ pickedDate }) => {
-  const data = {
-    labels: datasets[pickedDate.def].labels,
-    datasets: [
-      {
-        label: `Spent`,
-        data: datasets[pickedDate.def].data,
-        borderColor: '#2992F0',
-        backgroundColor: 'rgba(75, 192, 192, 0.2)',
-        tension: 0.4,
-      },
-    ],
-  }
+const ChartView = ({ pickedDate, expenses }) => {
+  const [chartData, setChartData] = useState({ labels: [], datasets: [] });
+  
+  useEffect(() => {
+    const allPayments = expenses || loadFromLocalStorage('paymentsList') || [];
+    const data = getData(pickedDate.def, allPayments);
+    
+    setChartData({
+      labels: getLabels(pickedDate.def),
+      datasets: [
+        {
+          label: 'Spent',
+          data: data,
+          borderColor: '#2992F0',
+          backgroundColor: 'rgba(75, 192, 192, 0.2)',
+          tension: 0.4,
+          pointRadius: 6,
+          pointHoverRadius: 8,
+        },
+      ],
+    });
+  }, [pickedDate]);
+
+  const getLabels = (interval) => {
+    switch (interval) {
+      case "day": return Array.from({ length: 24 }, (_, i) => `${i}:00`);
+      case "week": return ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
+      case "month": return Array.from({ length: 31 }, (_, i) => `Day ${i + 1}`);
+      case "halfyear": return ['January', 'February', 'March', 'April', 'May', 'June'];
+      case "year": return ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+      default: return [];
+    }
+  };
 
 	return (
 		<Line 
 			className='px-4 pt-1 pb-3'
 			options={options} 
-			data={data} 
+			data={chartData} 
 		/>		
 	)
 }

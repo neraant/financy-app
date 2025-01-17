@@ -15,7 +15,7 @@ const headerContent = {
     title: "Платежи"
   },
   addSpent: {
-    link: "/",
+    link: "/payments",
     icon: backIcon,
     alt: "back",
     title: "Добавить"
@@ -37,7 +37,7 @@ const Header = ({ page = "home" }) => {
 		<header className='py-3 px-6 bg-white'>
 			<div className="screen-max-width">
 				<nav className="flex justify-between items-center">
-					<Link to={content.link}>
+					<Link to={content.link} className={`${page !== 'home' ? 'transform-all duration-200 ease-in hover:-translate-x-[2px]' : ''}`}>
 						<img src={content.icon} alt={content.alt} width={page === "home" ? 24 : 12} />
 					</Link>
 					<h1 className={`text-base font-normal font-sans uppercase ${page && 'ml-6'}`}>

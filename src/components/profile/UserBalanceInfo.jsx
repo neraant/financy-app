@@ -18,7 +18,7 @@ const calculateMonthlySpent = () => {
   return (monthlyPayments.reduce((acc, { total }) => acc + Number(total), 0)).toFixed(2);
 };
 
-const UserBalanceInfo = ({ showAddBalance, setShowAddBalance, balanceInput, setBalanceInput, isHomepage = true, addBalance }) => {
+const UserBalanceInfo = ({ showAddBalance, setShowAddBalance, balanceInput, setBalanceInput, isHomepage = true, addBalance, isEditing, setIsEditing }) => {
 	const [spentThisMonth, setSpentThisMonth] = useState(0)
 	const [balance, setBalance] = useState(0)
 
@@ -60,8 +60,10 @@ const UserBalanceInfo = ({ showAddBalance, setShowAddBalance, balanceInput, setB
 								balanceInfo={balances[i]} 
 								index={i}
 								setShowAddBalance={setShowAddBalance}
-								showAddBalance={showAddBalance}
 								isHomepage={isHomepage}
+								setIsEditing={setIsEditing}
+								setBalanceInput={setBalanceInput}
+								balance={balance}
 							/>
 						))}
 					</div>
@@ -77,13 +79,18 @@ const UserBalanceInfo = ({ showAddBalance, setShowAddBalance, balanceInput, setB
 			>
 				<div 
 					className={`absolute w-full h-full bg-black top-0 left-0 z-10 opacity-40 `} 
-					onClick={() => setShowAddBalance(false)}
+					onClick={() => {
+						setShowAddBalance(false)
+						setIsEditing(false)
+					}}
 				/>
 				<AddBalancePopup 
 					showAddPopup={showAddBalance} 
 					balanceInput={balanceInput}
 					setBalanceInput={setBalanceInput}	
 					addBalance={addBalance}
+					isEditing={isEditing}
+					balance={balance}
 				/>
 			</div>
 		</div>

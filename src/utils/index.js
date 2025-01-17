@@ -1,14 +1,16 @@
-import add from "/assets/icons/add_icon.png"
+import add from "/assets/icons/add_icon.svg"
 import arrow from "/assets/icons/arrow_icon.svg"
 import back from "/assets/icons/back_icon.svg"
 import cash from "/assets/icons/cash_icon.svg"
 import deleteI from '/assets/icons/delete_icon.svg'
+import edit from "/assets/icons/edit_icon.svg"
 import google from "/assets/icons/google_icon.svg"
 import list from '/assets/icons/list_icon.svg'
 import more from "/assets/icons/more_icon.svg"
 import note from "/assets/icons/note_icon.svg"
 import notification from "/assets/icons/notification_icon.svg"
 import purse from "/assets/icons/purse_icon.svg"
+import reload from "/assets/icons/reload_icon.svg"
 import settings from "/assets/icons/settings_icon.svg"
 import statistic from "/assets/icons/statistic_icon.svg"
 import telegram from "/assets/icons/telegram_icon.svg"
@@ -33,3 +35,5 @@ export const googleIcon = google
 export const tgIcon = tg 
 export const deleteIcon = deleteI
 export const addIcon = add
+export const reloadIcon = reload
+export const editIcon = edit

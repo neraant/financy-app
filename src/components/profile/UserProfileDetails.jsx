@@ -25,13 +25,13 @@ const UserProfileDetails = () => {
 						</span>
 
 						<div className="flex items-center bg-white gap-6 py-2 px-4 rounded-lg absolute left-[50%] bottom-[-66px] translate-x-[-50%] shadow-sm">
-							<button>
+							<button className='transform-all duration-300 hover:scale-[1.10]'>
 								<img src={googleIcon} alt="google" width={24} height={24} />
 							</button>
-							<button>
+							<button className='transform-all duration-300 hover:scale-[1.10]'>
 								<img src={vkIcon} alt="vk" width={24} height={24} />
 							</button>
-							<button>
+							<button className='transform-all duration-300 hover:scale-[1.10]'>
 								<img src={tgIcon} alt="telegram" width={24} height={24} />
 							</button>
 						</div>

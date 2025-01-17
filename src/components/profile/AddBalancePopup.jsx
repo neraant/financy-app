@@ -1,4 +1,4 @@
-const AddBalancePopup = ({ showAddBalance, balanceInput, setBalanceInput, addBalance }) => {
+const AddBalancePopup = ({ balanceInput, setBalanceInput, addBalance, isEditing, balance }) => {
 	return (
 		<form 
 			className={`absolute z-20 top-[50%] left-[50%] translate-y-[-50%] translate-x-[-50%]  bg-white p-6 rounded-md flex flex-col w-full max-w-80`}

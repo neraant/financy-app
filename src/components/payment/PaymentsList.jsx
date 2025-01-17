@@ -30,7 +30,7 @@ const PaymentsList = () => {
 	return (
 		<section className='px-6 pb-6 mt-8 flex flex-col items-center'>
 			<div className="flex screen-max-width w-full mb-4">
-					<Link to="/addSpent" className='font-sans text-sm bg-[#D4FFEA] py-2 w-full shadow-md rounded-md text-center'>
+					<Link to="/addSpent" className='font-sans text-sm bg-[#D4FFEA] py-2 w-full shadow-md rounded-md text-center transition-all duration-300 hover:scale-[1.005] hover:shadow-lg'>
 						Добавить 
 					</Link>
 			</div>

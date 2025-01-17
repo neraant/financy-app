@@ -1,5 +1,6 @@
 import { isNumber } from 'chart.js/helpers';
 import { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 import { v4 as uuidv4 } from 'uuid';
 import { months } from '../../utils/helpers';
 import { loadFromLocalStorage, saveToLocalStorage } from '../../utils/storage';
@@ -16,14 +17,18 @@ const categories = [
 	"Разное",
 ]
 
-function processDate(date) {
-	const day = date.getDate()
-	const month = months[date.getMonth()]
-	const hours = date.getHours()
-	const minutes = date.getMinutes()
-	const seconds = date.getSeconds()
+function padNumber(num) {
+  return num < 10 ? `0${num}` : num;
+}
 
-	return `${day} ${month} в ${hours}:${minutes}:${seconds}`
+function processDate(date) {
+  const day = date.getDate();
+  const month = months[date.getMonth()];
+  const hours = padNumber(date.getHours());
+  const minutes = padNumber(date.getMinutes());
+  const seconds = padNumber(date.getSeconds());
+
+  return `${day} ${month} в ${hours}:${minutes}:${seconds}`;
 }
 
 const calculateMonthlySpent = () => {
@@ -42,7 +47,7 @@ const calculateMonthlySpent = () => {
 
 const AddSpent = () => {
 	const [spentName, setSpentName] = useState("")
-	const [spentTotal, setSpentTotal] = useState(0)
+	const [spentTotal, setSpentTotal] = useState("")
 	const [category, setCategory] = useState(categories[0])
 
 	const [showCategories, setShowCategories] = useState(false)
@@ -66,7 +71,7 @@ const AddSpent = () => {
 	}
 
 	const handleForm = (e) => {
-		e.preventDefault()
+		// e.preventDefault()
 
 		if(spentName === "" || spentTotal === "" || !isNumber(spentTotal)) return
 
@@ -126,13 +131,13 @@ const AddSpent = () => {
 								className="category-picking relative" 
 								onClick={handleDropDown}
 							>
-								<span className='inline-block font-sans text-base py-2 px-3 bg-[#8ecaff30] rounded-md w-full'>
+								<span className='inline-block font-sans text-base py-2 px-3 bg-[#8ecaff30] rounded-md w-full cursor-pointer'>
 									{category}
 								</span>
 
 								<div className={`flex flex-col bg-white shadow-md rounded-md overflow-hidden absolute w-full top-[100%] max-h-0 transition-all duration-500 ${showCategories && 'max-h-56 overflow-visible overflow-x-hidden'}`}>
 									{categories.map((category, i) => (
-										<div className='relative' key={category}>
+										<div className='relative cursor-pointer' key={category}>
 											<span 
 												className='inline-block font-sans text-sm p-3 hover:bg-[#8ecaff30] w-full'
 												onClick={() => handleCategory(category)}
@@ -164,13 +169,13 @@ const AddSpent = () => {
 							/>
 						</div>
 
-						<button 
-							type='submit' 
-							className='font-sans text-base py-2 w-full bg-[#D4FFEA] mt-auto rounded-md shadow-md'
+						<Link 
+							to="/payments"
+							className='font-sans text-base py-2 w-full bg-[#D4FFEA] mt-auto rounded-md shadow-md text-center transition-all duration-300 hover:scale-[1.005] hover:shadow-lg'
 							onClick={handleForm}
 						>
 							Добавить
-						</button>
+						</Link>
 					</form>
 				</div>
 			</section>

@@ -65,7 +65,7 @@ const Statistic = () => {
 							className="date-picking cursor-pointer flex items-center justify-end gap-2 relative w-full"
 							onClick={handleDateList}
 						>
-							<span className='text-xs font-sans text-gray'>
+							<span className='text-xs font-sans text-gray transition-all duration-200 hover:text-black'>
 								{date}
 							</span>
 							
