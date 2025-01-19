@@ -18,7 +18,7 @@ const calculateMonthlySpent = () => {
   return (monthlyPayments.reduce((acc, { total }) => acc + Number(total), 0)).toFixed(2);
 };
 
-const UserBalanceInfo = ({ showAddBalance, setShowAddBalance, balanceInput, setBalanceInput, isHomepage = true, addBalance, isEditing, setIsEditing }) => {
+const UserBalanceInfo = ({ showAddBalance, setShowAddBalance, balanceInput, setBalanceInput, isHomepage = true, addBalance, isEditing, setIsEditing, editBalance }) => {
 	const [spentThisMonth, setSpentThisMonth] = useState(0)
 	const [balance, setBalance] = useState(0)
 
@@ -89,6 +89,7 @@ const UserBalanceInfo = ({ showAddBalance, setShowAddBalance, balanceInput, setB
 					balanceInput={balanceInput}
 					setBalanceInput={setBalanceInput}	
 					addBalance={addBalance}
+					editBalance={editBalance}
 					isEditing={isEditing}
 					balance={balance}
 				/>

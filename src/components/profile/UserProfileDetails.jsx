@@ -1,6 +1,6 @@
 import { googleIcon, tgIcon, userIcon, vkIcon } from '../../utils'
 
-const UserProfileDetails = () => {
+const UserProfileDetails = ({ handleSignOut, userEmail }) => {
 	return (
 		<section className="bg-blue pt-8 pb-12 mb-4">
 			<div className="screen-max-width">
@@ -13,7 +13,7 @@ const UserProfileDetails = () => {
 
 					<div className="flex flex-col items-center gap-2 w-full">
 						<h2 className="font-medium font-sans text-xl">
-							Никнейм
+							{userEmail}
 						</h2>
 
 						<span className="font-normal font-sans text-xs text-gray inline-block ">
@@ -35,6 +35,13 @@ const UserProfileDetails = () => {
 								<img src={tgIcon} alt="telegram" width={24} height={24} />
 							</button>
 						</div>
+
+						<button 
+							className='absolute top-0 right-[12px] px-4 py-1 bg-red-500 text-white font-sans text-md rounded-md hover:bg-red-400 transition-all duration-200'
+							onClick={handleSignOut}
+						>
+							Выйти
+						</button>
 					</div>
 				</div>
 			</div>

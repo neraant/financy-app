@@ -1,4 +1,4 @@
-const AddBalancePopup = ({ balanceInput, setBalanceInput, addBalance, isEditing, balance }) => {
+const AddBalancePopup = ({ balanceInput, setBalanceInput, addBalance, isEditing, editBalance }) => {
 	return (
 		<form 
 			className={`absolute z-20 top-[50%] left-[50%] translate-y-[-50%] translate-x-[-50%]  bg-white p-6 rounded-md flex flex-col w-full max-w-80`}
@@ -17,7 +17,10 @@ const AddBalancePopup = ({ balanceInput, setBalanceInput, addBalance, isEditing,
 
 			<button
 				className='py-2 bg-[#D4FFEA] font-sans font-normal text-base'
-				onClick={(e) => addBalance(e, balanceInput)}
+				onClick={
+					isEditing ? (e) => editBalance(e, balanceInput) : 
+					(e) => addBalance(e, balanceInput)
+				}
 			>
 				Добавить
 			</button>
