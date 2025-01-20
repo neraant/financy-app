@@ -1,3 +1,4 @@
+import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { backIcon, notificationIcon, userIcon } from '../../utils';
 
@@ -30,6 +31,19 @@ const headerContent = {
 
 const Header = ({ page = "home" }) => {
 	const content = headerContent[page] || {};
+  const [user, setUser] = useState({
+    email: "example@gmail.com",
+    displayName: "Guest",
+    photoUrl: {userIcon},
+    uid: "",
+  })
+
+  useEffect(() => {
+    const loadedUser = localStorage.getItem('userInfo')
+    if(loadedUser) {
+      setUser(JSON.parse(loadedUser))
+    }
+  }, [])
 
   if (!content.title) return null;
 
@@ -45,7 +59,7 @@ const Header = ({ page = "home" }) => {
 					</h1>
 
 					<Link to="/profile">
-						<img src={userIcon} alt='profile' width={40} height={40}/>
+						<img className='overflow-hidden rounded-full' src={user.photoUrl} alt='profile' width={40} height={40}/>
 					</Link>
 				</nav>
 			</div>

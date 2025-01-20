@@ -1,11 +1,11 @@
 import { isNumber } from 'chart.js/helpers'
 import { signOut } from 'firebase/auth'
-import { useState } from 'react'
-import { useAuthState } from 'react-firebase-hooks/auth'
+import { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
+import { userIcon } from '../../utils'
 import { loadFromLocalStorage, saveToLocalStorage } from '../../utils/storage'
 import Header from '../common/Header'
-import { auth } from '../firebase/firebase'
+import { auth } from '../config/firebase'
 import UserBalanceInfo from './UserBalanceInfo'
 import UserProfileDetails from './UserProfileDetails'
 
@@ -13,10 +13,21 @@ const Profile = () => {
 	const [showAddBalance, setShowAddBalance] = useState(false)
 	const [isEditing, setIsEditing] = useState(false)
 	const [balanceInput, setBalanceInput] = useState("")
-	
 	const navigate = useNavigate()
-	const [user] = useAuthState(auth)
-	
+	const [user, setUser] = useState({
+		email: "example@gmail.com",
+		displayName: "Guest",
+		photoUrl: {userIcon},
+		uid: "",
+	})
+
+	useEffect(() => {
+		const loadedUser = localStorage.getItem('userInfo')
+		if(loadedUser) {
+			setUser(JSON.parse(loadedUser))
+		}
+	}, [])
+
 	const addBalance = (e, newBalance) => {
 		e.preventDefault()
 		if(!isNumber(newBalance)) return
@@ -45,8 +56,10 @@ const Profile = () => {
 	const handleSignOut = async () => {
 		try {
 			await signOut(auth)
+			document.cookie = 'isAuthenticated=; path=/; max-age=0;'
+			localStorage.removeItem('userInfo')
 		} catch (err) {
-			console.error(err)
+			console.error('Error during sign out:', err)
 		}
 		navigate('/signin')
 	}
@@ -56,7 +69,7 @@ const Profile = () => {
 			<Header page={"profile"}/>
 			<UserProfileDetails 
 				handleSignOut={handleSignOut}
-				userEmail={user.email}
+				user={user}
 			/>
 			<UserBalanceInfo 
 				showAddBalance={showAddBalance} 

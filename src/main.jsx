@@ -4,8 +4,7 @@ import App from './App'
 import './index.css'
 
 import { createBrowserRouter, RouterProvider } from 'react-router-dom'
-import SignIn from './components/Auth/SignIn'
-import SignUp from './components/Auth/SignUp'
+import Auth from './components/Auth/Auth'
 import NotFoundPage from './components/common/NotFoundPage'
 import ProtectedRoute from './components/common/ProtectedRoute'
 import AddSpent from './components/payment/AddSpent'
@@ -23,7 +22,7 @@ const router = createBrowserRouter([
   },
   {
     path: '/profile',
-    element:
+    element: 
     <ProtectedRoute>
       <Profile />
     </ProtectedRoute>,
@@ -46,13 +45,8 @@ const router = createBrowserRouter([
     errorElement: <NotFoundPage />,
   },
   {
-    path: "/signup",
-    element: <SignUp />,
-    errorElement: <NotFoundPage />,
-  },
-  {
     path: "/signin",
-    element: <SignIn />,
+    element: <Auth />,
     errorElement: <NotFoundPage />,
   },
 ])

@@ -1,23 +1,23 @@
-import { googleIcon, tgIcon, userIcon, vkIcon } from '../../utils'
+import { googleIcon, tgIcon, vkIcon } from '../../utils';
 
-const UserProfileDetails = ({ handleSignOut, userEmail }) => {
+const UserProfileDetails = ({ handleSignOut, user }) => {
 	return (
 		<section className="bg-blue pt-8 pb-12 mb-4">
 			<div className="screen-max-width">
 				<div className="flex flex-col items-center gap-4 relative">
 					<img 
-						src={userIcon} 
+						src={user.photoUrl}
 						alt="avatar" 
-						className='object-cover w-full h-full max-w-24'
+						className='object-cover w-full h-full max-w-24 rounded-full overflow-hidden'
 					/>
 
 					<div className="flex flex-col items-center gap-2 w-full">
 						<h2 className="font-medium font-sans text-xl">
-							{userEmail}
+							{user.displayName}
 						</h2>
 
 						<span className="font-normal font-sans text-xs text-gray inline-block ">
-							+7 915 999 99 99
+							{user.email}
 						</span>
 
 						<span className="font-normal font-sans text-xs text-gray inline-block ">
@@ -37,8 +37,8 @@ const UserProfileDetails = ({ handleSignOut, userEmail }) => {
 						</div>
 
 						<button 
-							className='absolute top-0 right-[12px] px-4 py-1 bg-red-500 text-white font-sans text-md rounded-md hover:bg-red-400 transition-all duration-200'
 							onClick={handleSignOut}
+							className='absolute top-0 right-[12px] px-4 py-1 bg-red-500 text-white font-sans text-md rounded-md hover:bg-red-400 transition-all duration-200'
 						>
 							Выйти
 						</button>
